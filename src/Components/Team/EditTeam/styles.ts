@@ -326,8 +326,10 @@ export const Submit = styled.button`
 	font-weight: 500;
 	padding: 0.7rem 0;
 	font-size: 1.4rem;
+	margin-bottom: 1rem;
 	border: 1px solid red;
 	border-radius: 0.2rem;
+	box-shadow: 0px 9px 1px #8e1f6d12;
 	background: linear-gradient(0deg, #782966, #9a3164);
 	&:focus {
 		outline: none;

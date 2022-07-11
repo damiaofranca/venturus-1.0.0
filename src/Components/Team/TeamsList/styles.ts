@@ -37,6 +37,7 @@ export const AddTeam = styled.button`
 	align-items: center;
 	border-radius: 0.46rem;
 	justify-content: center;
+	box-shadow: 0px 3px 8px #8e1f6d8f;
 	background: linear-gradient(180deg, #c00e4f, #8b206f);
 `;
 
