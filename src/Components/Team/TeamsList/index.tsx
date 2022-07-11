@@ -7,6 +7,7 @@ import filterUp from "../../../Assets/filterUp.png";
 import add from "../../../Assets/plus.png";
 import Share from "../../../Assets/share.png";
 import { TeamEntenty } from "../../../Interfaces/team";
+import { DeleteTeam } from "../DeleteTeam";
 import {
 	AddTeam,
 	ArrowFilter,
@@ -29,6 +30,8 @@ import "./styles.ts";
 const TeamsList: React.FC<{
 	data: TeamEntenty[];
 }> = ({ data }) => {
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [ID, setID] = useState<string>("");
 	const teamsRef = useRef<any>([]);
 	const [stylizedItem, setStylizedItem] = useState<number | null>(null);
 	const [teams, setTeams] = useState<any[]>(data);
@@ -63,6 +66,11 @@ const TeamsList: React.FC<{
 		setTeams(_prices);
 	};
 
+	const setEdit = (id: string) => {
+		setShowModal(true);
+		setID(id);
+	};
+
 	const listTeams = useMemo(() => {
 		return (teams && teams).map((value: any, index: any) => (
 			<TeamItem
@@ -79,7 +87,14 @@ const TeamsList: React.FC<{
 				<TeamItemInfo>
 					{value.description}
 					<IconsContainer>
-						<ImgActions src={Delete} title="Delete team" alt="delete icon" />
+						<ImgActions
+							src={Delete}
+							title="Delete team"
+							alt="delete icon"
+							onClick={() => {
+								setEdit(value.id);
+							}}
+						/>
 						<ImgActions src={Share} title="Share team" alt="share icon" />
 						<Link to={`edit-team/${value.id}`}>
 							<ImgActions src={Edit} title="Edit team" alt="edit icon" />
@@ -130,6 +145,7 @@ const TeamsList: React.FC<{
 			<ListTeam>
 				<TeamsContainer>{listTeams}</TeamsContainer>
 			</ListTeam>
+			<DeleteTeam isOpen={showModal} onCancel={setShowModal} id={ID} />
 		</Container>
 	);
 };
