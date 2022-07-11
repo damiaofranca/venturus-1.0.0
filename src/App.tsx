@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Components from "./Components/index";
+import Container from "./Pages/Container";
+import HomePage from "./Pages/HomePage";
+import Teams from "./Pages/Team";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Container>
+				<Components.Header />
+				<Routes>
+					<Route path="/" element={<HomePage />}></Route>
+					<Route path="register-team" element={<Teams.AddTeamPage />}></Route>
+					<Route path="edit-team/:id" element={<Teams.EditTeamPage />}></Route>
+				</Routes>
+				<Components.Footer />
+				<ToastContainer />
+			</Container>
+		</BrowserRouter>
+	);
 }
 
 export default App;
